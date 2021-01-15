@@ -35,6 +35,12 @@ dyn_arr_get_number_of_elements(
 	dyn_arr_t* array
 );
 
+ne_size_t
+dyn_arr_index_of(
+	dyn_arr_t* array,
+	void* element
+);
+
 void*
 dyn_arr_get_at(
 	dyn_arr_t* array,
