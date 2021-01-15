@@ -1,0 +1,8 @@
+Copyright (c) 2021 Peter Markfelder
+This software is licensed under GPLv3-only. See COPYING for more information.
+
+To build the software copy config.def.mk to config.mk and edit it to your preference.
+Run 'make' to build and 'make install' to install.
+Documentation can be found at 'https://markfelder.org/software/neweden'
+
+This is unreleased software. Expect rapid and frequent changes.
