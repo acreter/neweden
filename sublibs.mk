@@ -13,7 +13,7 @@
 
 BUILD := ../../$(BUILD)
 
-CFLAGS += -O2 -fPIC
+CFLAGS += -fPIC -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os -D_POSIX_C_SOURCE=200809L
 CPPFLAGS += -I../include/
 DEPFLAGS = -MT $@ -MMD -MP -MF $*.d
 
@@ -25,7 +25,7 @@ SONAME := $(BUILD)/lib$(LIBNAME).so
 SOMJR := $(SONAME).$(MAJOR)
 REALNAME := $(SOMJR).$(MINOR).$(RELEASE)
 
-all: $(SONAME)
+all: $(SONAME) $(BUILD)/lib$(LIBNAME).a
 
 $(SONAME): $(SOMJR)
 	ln -sf $(notdir $<) $@
@@ -36,6 +36,9 @@ $(SOMJR): $(REALNAME)
 $(REALNAME): $(patsubst %.c,%.o,$(SRCS))
 	mkdir -p $(BUILD)/
 	$(CC) -shared -Wl,-soname,$(notdir $(SONAME)) -o $@ $^ $(LDFLAGS)
+
+$(BUILD)/lib$(LIBNAME).a: $(patsubst %.c,%.o,$(SRCS))
+	$(AR) rcs $@ $^
 
 %.o: %.c
 	$(COMPILE.c) -o $@ $<
