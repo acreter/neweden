@@ -11,11 +11,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __BOOLEAN_H_INCLUDED
-#define __BOOLEAN_H_INCLUDED 1
+#include <neweden/essence/dynamic_array.h>
 
-typedef _Bool bool;
-#define false 0
-#define true 1
+#include <errno.h>
 
-#endif
+int
+_dynarr_append_n(
+		char** block,
+		void* elements,
+		size_t n,
+		size_t element_size
+) {
+	if (!block)
+	{ return (errno = EINVAL, 0); }
+
+	return _dynarr_insert_n(block, dynarr_len(*block), elements, n, element_size);
+}

@@ -11,9 +11,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __TYPES_H_INCLUDED
-#define __TYPES_H_INCLUDED 1
+#include <neweden/essence/allocate.h>
 
-typedef unsigned long ne_size_t;
-
-#endif
+void*
+allocate(
+	size_t size)
+{
+	return size ? malloc(size) : NULL;
+}

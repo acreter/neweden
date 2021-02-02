@@ -14,116 +14,126 @@
 #ifndef __DYNAMIC_ARRAY_H_INCLUDED
 #define __DYNAMIC_ARRAY_H_INCLUDED 1
 
-#include <neweden/essence/types.h>
+#include <stddef.h>
 
-typedef struct dyn_arr dyn_arr_t;
+#define dynarr_len(block) _dynarr_len((char *) (block))
+#define dynarr_free(block) _dynarr_free((char **) (block))
 
-dyn_arr_t*
-dyn_arr_create(
-	ne_size_t limit,
-	ne_size_t size_of_element,
-	ne_size_t (*new_limit_func) (ne_size_t)
+#define dynarr_insert_n(block, index, elements, n) \
+	_dynarr_insert_n( \
+			(char **) (block), \
+			(index), \
+			(void *) (elements), \
+			(n), \
+			sizeof **(block))
+
+#define dynarr_append_n(block, elements, n) \
+	_dynarr_append_n( \
+			(char **) (block), \
+			(void *) (elements), \
+			(n), \
+			sizeof **(block))
+
+#define dynarr_prepend_n(block, elements, n) \
+	_dynarr_insert_n( \
+			(char **) (block), \
+			0, \
+			(void *) (elements), \
+			(n), \
+			sizeof **(block))
+
+#define dynarr_remove_n(block, index, n) \
+	_dynarr_remove_n( \
+			(char **) (block), \
+			(index), \
+			(n), \
+			sizeof **(block))
+
+#define dynarr_remove_first_n(block, n) \
+	_dynarr_remove_n( \
+			(char **) (block), \
+			0, \
+			(n), \
+			sizeof **(block))
+
+#define dynarr_remove_last_n(block, n) \
+	_dynarr_remove_last_n( \
+			(char **) (block), \
+			(n), \
+			sizeof **(block))
+
+typedef struct
+{
+	size_t len, limit;
+	char block[];
+} dynarr;
+
+dynarr*
+_dynarr_self(
+		char* block
 );
 
-void
-dyn_arr_destroy(
-	dyn_arr_t* array
+size_t
+_dynarr_len(
+		char* block
 );
 
-ne_size_t
-dyn_arr_get_number_of_elements(
-	dyn_arr_t* array
+int
+_dynarr_free(
+		char** block
 );
 
-ne_size_t
-dyn_arr_index_of(
-	dyn_arr_t* array,
-	void* element
+int
+_dynarr_insert_n (
+		char** block,
+		size_t index,
+		void* elements,
+		size_t n,
+		size_t element_size
 );
 
-void*
-dyn_arr_get_at(
-	dyn_arr_t* array,
-	ne_size_t index
+int
+_dynarr_append_n (
+		char** block,
+		void* elements,
+		size_t n,
+		size_t element_size
 );
 
-void*
-dyn_arr_get_first(
-	dyn_arr_t* array
+int
+_dynarr_remove_n (
+		char** block,
+		size_t index,
+		size_t n,
+		size_t element_size
 );
 
-void*
-dyn_arr_get_last(
-	dyn_arr_t* array
+int
+_dynarr_remove_last_n (
+		char** block,
+		size_t n,
+		size_t element_size
 );
 
-void
-dyn_arr_copy_element(
-	dyn_arr_t* array,
-	void* dest,
-	void* src
+int
+_dynarr_resize_to_n (
+		char** block,
+		size_t n,
+		size_t element_size
 );
 
-void
-dyn_arr_clear(
-	dyn_arr_t* array 
+int
+_dynarr_prepare_for_n (
+		char** block,
+		size_t n,
+		size_t element_size
 );
 
-dyn_arr_t*
-dyn_arr_insert(
-	dyn_arr_t* array,
-	ne_size_t index,
-	void* elements,
-	ne_size_t number_of_elements
-);
-
-dyn_arr_t*
-dyn_arr_append(
-	dyn_arr_t* array,
-	void* elements,
-	ne_size_t number_of_elements
-);
-
-dyn_arr_t*
-dyn_arr_prepend(
-	dyn_arr_t* array,
-	void* elements,
-	ne_size_t number_of_elements
-);
-
-void
-dyn_arr_remove(
-	dyn_arr_t* array,
-	ne_size_t index,
-	ne_size_t number_of_elements
-);
-
-void
-dyn_arr_remove_last(
-	dyn_arr_t* array,
-	ne_size_t number_of_elements
-);
-
-void
-dyn_arr_remove_first(
-	dyn_arr_t* array,
-	ne_size_t number_of_elements
-);
-
-ne_size_t
-dyn_arr_size(
-	dyn_arr_t* array
-);
-
-dyn_arr_t*
-dyn_arr_copy(
-	dyn_arr_t* array,
-	ne_size_t (*new_limit_func) (ne_size_t)
-);
-
-ne_size_t
-dyn_arr_times_two(
-	ne_size_t size
+int
+_dynarr_prepare_for_n_more (
+		char** block,
+		size_t n,
+		size_t element_size
 );
 
 #endif

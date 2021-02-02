@@ -25,7 +25,7 @@ src/essence: VERSION
 
 clean:
 	$(MAKE) -C src/essence clean
-	$(RM) $(BUILD)
+	$(RM) $(BUILD) $(wildcard *.a)
 
 config.mk:
 	cp config.def.mk $@

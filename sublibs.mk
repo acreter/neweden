@@ -13,7 +13,7 @@
 
 BUILD := ../../$(BUILD)
 
-CFLAGS += -fPIC -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os -D_POSIX_C_SOURCE=200809L
+CFLAGS += -g -fPIC -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os -D_POSIX_C_SOURCE=200809L
 CPPFLAGS += -I../include/
 DEPFLAGS = -MT $@ -MMD -MP -MF $*.d
 

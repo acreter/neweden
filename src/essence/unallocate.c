@@ -11,11 +11,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __ESSENCE_H_INCLUDED
-#define __ESSENCE_H_INCLUDED 1
+#include <neweden/essence/allocate.h>
 
-#include <neweden/essence/types.h>
-#include <neweden/essence/boolean.h>
-#include <neweden/essence/dynamic_array.h>
+#include <errno.h>
 
-#endif
+int
+unallocate(
+	void** array)
+{
+	if (!array || !(*array))
+	{ return (errno = EINVAL, 0); }
+
+	free(*array);
+	*array = NULL;
+
+	return 1;
+}
