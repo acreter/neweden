@@ -21,14 +21,14 @@ _dynarr_prepare_for_n_more(
 		size_t n,
 		size_t element_size
 ) {
-	if (!block || !*block)
+	if (!block)
 	{ return (errno = EINVAL, 0); }
 
 	dynarr* array = _dynarr_self(*block);
-	size_t new_size = (n + array->len) * element_size;
-	if (new_size < array->len * element_size)
+	size_t new_size = array ? (n + array->len) * element_size : n * element_size;
+	if (array && new_size < array->len * element_size)
 	{ return (errno = ERANGE, 0); }
 
-	size_t new_n = n + array->len;
+	size_t new_n = array ? n + array->len : n;
 	return _dynarr_prepare_for_n(block, new_n, element_size);
 }

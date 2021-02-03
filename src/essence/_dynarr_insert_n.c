@@ -24,7 +24,7 @@ _dynarr_insert_n(
 		size_t n,
 		size_t element_size
 ) {
-	if (!block || _dynarr_len(*block) < index)
+	if (!block || _dynarr_len(*block) < index || !n)
 	{ return (errno = EINVAL, 0); }
 
 	if (!_dynarr_prepare_for_n_more(block, n, element_size))
