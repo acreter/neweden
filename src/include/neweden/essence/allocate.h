@@ -14,8 +14,6 @@
 #ifndef __ALLOCATE_H_INCLUDED
 #define __ALLOCATE_H_INCLUDED 1
 
-#include <neweden/essence/types.h>
-
 #include <stddef.h>
 #include <stdlib.h> /* Or any other header that declares malloc, realloc etc. */
 
