@@ -14,6 +14,15 @@
 #ifndef __GRAPHS_H_INCLUDED
 #define __GRAPHS_H_INCLUDED 1
 
+#include <stddef.h>
+
 typedef int* graph;
+typedef graph dyngraph;
+
+int
+graph_add_nodes(dyngraph g, int number_of_nodes);
+
+int
+graph_edit_edges(graph g, size_t number_of_edges, size_t from_node, int* edges);
 
 #endif
