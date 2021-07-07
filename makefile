@@ -18,13 +18,17 @@ BUILD = build
 INSTALL := install
 RM += -r
 
-all: src/essence
+all: src/essence src/everyshore
 
 src/essence: VERSION
 	$(MAKE) -C $@ all
 
+src/everyshore: VERSION src/essence
+	$(MAKE) -C $@ all
+
 clean:
 	$(MAKE) -C src/essence clean
+	$(MAKE) -C src/everyshore clean
 	$(RM) $(BUILD) $(wildcard *.a)
 
 config.mk:
@@ -32,5 +36,6 @@ config.mk:
 
 install: all
 	$(MAKE) -C src/essence install
+	$(MAKE) -C src/everyshore install
 
-.PHONY: all src/essence clean install
+.PHONY: all src/essence src/everyshore clean install
