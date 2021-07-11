@@ -1,4 +1,4 @@
-LIBNAME = essence
+LIBNAME = $(LIBESSENTIALS)
 
 include VERSION
 include ../../sublibs.mk
