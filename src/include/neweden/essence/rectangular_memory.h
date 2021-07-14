@@ -63,21 +63,21 @@ char*
 _rectmem_xstep(
 		char** block,
 		char* current,
-		int by,
+		unsigned int by,
 		size_t element_size);
 
 char*
 _rectmem_ystep(
 		char** block,
 		char* current,
-		int by,
+		unsigned int by,
 		size_t element_size);
 
 char*
 _rectmem_step(
 		char** block,
 		char* current,
-		int by,
+		unsigned int by,
 		size_t element_size);
 
 #define rectmem_xstep(block, current, by) \

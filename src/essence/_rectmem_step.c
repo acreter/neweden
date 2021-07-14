@@ -18,7 +18,7 @@ char*
 _rectmem_step(
 		char** block,
 		char* current,
-		int by,
+		unsigned int by,
 		size_t element_size)
 {
 	if (!block || !(*block) || !current || !by || !element_size)
