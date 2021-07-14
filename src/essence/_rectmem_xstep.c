@@ -20,10 +20,5 @@ _rectmem_xstep(
 		unsigned int by,
 		size_t element_size)
 {
-	if (!block || !(*block) || !current || !by || !element_size)
-	{ return (errno = EINVAL, 0); }
-
-	struct dimensions* dim = rectmem_dimensions(*block);
-	size_t current_x_index = (current - *block) % dim->x;
-	return current + (((current_x_index + by) % dim->x) - current_x_index) * element_size;
+	return current + by * element_size;
 }

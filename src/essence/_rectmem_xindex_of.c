@@ -12,22 +12,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <neweden/essence/rectangular_memory.h>
-#include <errno.h>
 
-char*
-_rectmem_step(
+size_t
+_rectmem_xindex_of(
 		char** block,
-		char* current,
-		unsigned int by,
-		size_t element_size)
-{
-	if (!block || !(*block) || !current || !by || !element_size)
-	{ return (errno = EINVAL, 0); }
-
-	struct dimensions* dim = rectmem_dimensions(*block);
-	size_t current_index = current - *block;
-	if (current_index < dim->x * dim->y - by)
-	{ return current + by * element_size; }
-	else
-	{ return NULL; }
+		char* ptr,
+		size_t element_size
+) {
+	return ((ptr - *block) / element_size) % rectmem_dimensions(*block)->x;
 }

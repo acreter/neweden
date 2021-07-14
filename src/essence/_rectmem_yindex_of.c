@@ -13,12 +13,11 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-char*
-_rectmem_ystep(
+size_t
+_rectmem_yindex_of(
 		char** block,
-		char* current,
-		unsigned int by,
-		size_t element_size)
-{
-	return current + by * rectmem_dimensions(*block)->x * element_size;
+		char* ptr,
+		size_t element_size
+) {
+	return ((ptr - *block) / element_size) / rectmem_dimensions(*block)->x;
 }

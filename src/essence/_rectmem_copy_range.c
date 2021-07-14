@@ -13,12 +13,20 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-char*
-_rectmem_ystep(
-		char** block,
-		char* current,
-		unsigned int by,
-		size_t element_size)
-{
-	return current + by * rectmem_dimensions(*block)->x * element_size;
+int
+_rectmem_copy_range(
+		char** ref_from,
+		char** ref_to,
+		char* from,
+		char* to,
+		size_t nX,
+		size_t nY,
+		size_t element_size
+) {
+	struct dimensions* dim_from = _rectmem_dimensions(*ref_from);
+	struct dimensions* dim_to   = _rectmem_dimensions(*ref_to);
+
+	//TODO
+
+	return 0;
 }
