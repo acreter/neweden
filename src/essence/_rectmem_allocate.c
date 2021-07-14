@@ -11,33 +11,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __ALLOCATE_H_INCLUDED
-#define __ALLOCATE_H_INCLUDED 1
+#include <neweden/essence/rectangular_memory.h>
+#include <neweden/essence/allocate.h>
 
-#include <stddef.h>
-#include <stdlib.h> /* Or any other header that declares malloc, realloc etc. */
-
-void*
-allocate(
-	size_t size);
-
-void*
-xallocate(
-	size_t size);
+#include <errno.h>
 
 int
-reallocate(
-	void** array,
-	size_t size);
+_rectmem_allocate(
+		char** block,
+		size_t x,
+		size_t y,
+		size_t element_size)
+{
+	if (!block || *block || !x || !y || !element_size )
+	{ return (errno = EINVAL, 0); }
 
-int
-xreallocate(
-	void** array,
-	size_t old_size,
-	size_t new_size);
-
-int
-unallocate(
-	void** array);
-
-#endif
+	struct rectmem* new = xallocate(sizeof (struct rectmem) + x * y * element_size);
+	if (new) {
+		*block = new->block;
+		return 1;
+	} else {
+		return 0;
+	}
+}

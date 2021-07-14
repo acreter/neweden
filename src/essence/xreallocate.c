@@ -11,33 +11,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __ALLOCATE_H_INCLUDED
-#define __ALLOCATE_H_INCLUDED 1
+#include <neweden/essence/allocate.h>
 
-#include <stddef.h>
-#include <stdlib.h> /* Or any other header that declares malloc, realloc etc. */
-
-void*
-allocate(
-	size_t size);
-
-void*
-xallocate(
-	size_t size);
-
-int
-reallocate(
-	void** array,
-	size_t size);
+#include <errno.h>
+#include <string.h>
 
 int
 xreallocate(
 	void** array,
 	size_t old_size,
-	size_t new_size);
+	size_t new_size)
+{
+	if (!old_size || !new_size || !array || !*array)
+	{ return (errno = EINVAL, 0); }
 
-int
-unallocate(
-	void** array);
-
-#endif
+	void* new = realloc(*array, new_size);
+	if (new_size > old_size)
+	{ memset((char*) new + old_size, 0, new_size - old_size); }
+	
+	if (!new)
+	{ return 0; }
+	
+	*array = new;
+	return 1;
+}
