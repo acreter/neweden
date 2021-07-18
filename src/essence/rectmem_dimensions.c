@@ -13,12 +13,9 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-char*
-_rectmem_ystep(
-		char** block,
-		char* current,
-		unsigned int by,
-		size_t element_size)
+struct dimensions*
+rectmem_dimensions(
+		char* block)
 {
-	return current + by * rectmem_dimensions(*block)->x * element_size;
+	return block ? (struct dimensions*) rectmem_self(block) : NULL;
 }

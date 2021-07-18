@@ -12,21 +12,11 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <neweden/essence/rectangular_memory.h>
+#include <neweden/essence/allocate.h>
 
 int
-_rectmem_copy_range(
-		char** ref_from,
-		char** ref_to,
-		char* from,
-		char* to,
-		size_t nX,
-		size_t nY,
-		size_t element_size
-) {
-	struct dimensions* dim_from = _rectmem_dimensions(*ref_from);
-	struct dimensions* dim_to   = _rectmem_dimensions(*ref_to);
-
-	//TODO
-
-	return 0;
+rectmem_free(
+		char** block)
+{
+	return unallocate((void**) block);
 }

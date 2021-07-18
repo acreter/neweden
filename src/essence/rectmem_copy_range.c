@@ -13,9 +13,19 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-struct dimensions*
-_rectmem_dimensions(
-		char* block)
-{
-	return block ? (struct dimensions*) _rectmem_self(block) : NULL;
+#include <string.h>
+
+void
+rectmem_copy_range(
+		char** ref_from,
+		char** ref_to,
+		char* from,
+		char* to,
+		size_t nX,
+		size_t nY
+) {
+	for (unsigned int i = 0; i < nY; i += 1)
+	{ memcpy(rectmem_ystep(ref_to, to, i), rectmem_ystep(ref_from, from, i), nX); }
+
+	return;
 }

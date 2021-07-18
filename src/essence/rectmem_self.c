@@ -13,11 +13,9 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-size_t
-_rectmem_xindex_of(
-		char** block,
-		char* ptr,
-		size_t element_size
-) {
-	return ((ptr - *block) / element_size) % rectmem_dimensions(*block)->x;
+struct rectmem*
+rectmem_self(
+		char* block)
+{
+	return block ? ((struct rectmem*) block) - 1 : NULL;
 }

@@ -12,25 +12,16 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <neweden/essence/rectangular_memory.h>
-#include <neweden/essence/allocate.h>
 
-#include <errno.h>
-
-int
-_rectmem_allocate(
-		char** block,
-		size_t x,
-		size_t y,
-		size_t element_size)
-{
-	if (!block || *block || !x || !y || !element_size )
-	{ return (errno = EINVAL, 0); }
-
-	struct rectmem* new = xallocate(sizeof (struct rectmem) + x * y * element_size);
-	if (new) {
-		*block = new->block;
-		return 1;
-	} else {
-		return 0;
-	}
+void
+rectmem_copy(
+		char** ref_from,
+		char** ref_to,
+		char* from_start,
+		char* from_end,
+		char* to
+) {
+	rectmem_copy_range(ref_from, ref_to, from_start, to,
+			rectmem_xindex_of(ref_from, from_end) - rectmem_xindex_of(ref_from, from_end) + 1,
+			rectmem_yindex_of(ref_from, from_end) - rectmem_yindex_of(ref_from, from_end) + 1);
 }

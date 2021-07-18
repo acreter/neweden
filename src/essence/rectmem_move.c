@@ -13,12 +13,15 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-char*
-_rectmem_xstep(
-		char** block,
-		char* current,
-		unsigned int by,
-		size_t element_size)
-{
-	return current + by * element_size;
+void
+rectmem_move(
+		char** ref_from,
+		char** ref_to,
+		char* from_start,
+		char* from_end,
+		char* to
+) {
+	rectmem_move_range(ref_from, ref_to, from_start, to,
+			rectmem_xindex_of(ref_from, from_end) - rectmem_xindex_of(ref_from, from_end) + 1,
+			rectmem_yindex_of(ref_from, from_end) - rectmem_yindex_of(ref_from, from_end) + 1);
 }

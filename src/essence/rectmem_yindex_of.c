@@ -13,17 +13,10 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-int
-_rectmem_copy(
-		char** ref_from,
-		char** ref_to,
-		char* from_start,
-		char* from_end,
-		char* to,
-		size_t element_size
+size_t
+rectmem_yindex_of(
+		char** block,
+		char* ptr
 ) {
-	return _rectmem_copy_range(ref_from, ref_to, from_start, to,
-			_rectmem_xindex_of(ref_from, from_end, element_size) - _rectmem_xindex_of(ref_from, from_end, element_size) + 1,
-			_rectmem_yindex_of(ref_from, from_end, element_size) - _rectmem_yindex_of(ref_from, from_end, element_size) + 1,
-			element_size);
+	return (ptr - *block) / rectmem_dimensions(*block)->x;
 }

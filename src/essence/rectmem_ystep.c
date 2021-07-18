@@ -12,11 +12,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <neweden/essence/rectangular_memory.h>
-#include <neweden/essence/allocate.h>
 
-int
-_rectmem_free(
-		char** block)
-{
-	return unallocate((void**) block);
+char*
+rectmem_ystep(
+		char** block,
+		char* current,
+		unsigned int by
+) {
+	return current + by * rectmem_dimensions(*block)->x;
 }

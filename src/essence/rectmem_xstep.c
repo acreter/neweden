@@ -13,9 +13,11 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-struct rectmem*
-_rectmem_self(
-		char* block)
-{
-	return block ? ((struct rectmem*) block) - 1 : NULL;
+char*
+rectmem_xstep(
+		char** block,
+		char* current,
+		unsigned int by
+) {
+	return current + by;
 }
