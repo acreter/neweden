@@ -18,5 +18,6 @@ int
 rectmem_free(
 		char** block)
 {
-	return unallocate((void**) block);
+	struct rectmem* r = rectmem_self(*block);
+	return unallocate((void**) &r);
 }
