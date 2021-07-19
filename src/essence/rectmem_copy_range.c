@@ -17,8 +17,8 @@
 
 void
 rectmem_copy_range(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from,
 		char* to,
 		size_t nX,

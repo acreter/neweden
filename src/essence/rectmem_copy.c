@@ -15,8 +15,8 @@
 
 void
 rectmem_copy(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from_start,
 		char* from_end,
 		char* to

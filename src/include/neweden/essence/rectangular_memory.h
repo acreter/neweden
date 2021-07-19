@@ -44,38 +44,38 @@ rectmem_free(
 
 size_t
 rectmem_xindex_of(
-		char** block,
+		char* block,
 		char* ptr);
 
 size_t
 rectmem_yindex_of(
-		char** block,
+		char* block,
 		char* ptr);
 
 char*
 rectmem_xstep(
-		char** block,
+		char* block,
 		char* current,
 		unsigned int by);
 
 char*
 rectmem_ystep(
-		char** block,
+		char* block,
 		char* current,
 		unsigned int by);
 
 void
 rectmem_copy(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from_start,
 		char* from_end,
 		char* to);
 
 void
 rectmem_copy_range(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from,
 		char* to,
 		size_t nX,
@@ -83,16 +83,16 @@ rectmem_copy_range(
 
 void
 rectmem_move(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from_start,
 		char* from_end,
 		char* to);
 
 void
 rectmem_move_range(
-		char** ref_from,
-		char** ref_to,
+		char* ref_from,
+		char* ref_to,
 		char* from,
 		char* to,
 		size_t nX,

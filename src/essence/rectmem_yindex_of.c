@@ -15,8 +15,8 @@
 
 size_t
 rectmem_yindex_of(
-		char** block,
+		char* block,
 		char* ptr
 ) {
-	return (ptr - *block) / rectmem_dimensions(*block)->x;
+	return (ptr - block) / rectmem_dimensions(block)->x;
 }

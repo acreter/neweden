@@ -15,7 +15,7 @@
 
 char*
 rectmem_xstep(
-		char** block,
+		char* block,
 		char* current,
 		unsigned int by
 ) {
