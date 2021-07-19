@@ -17,8 +17,7 @@
 
 void
 rectmem_move_range(
-		char* ref_from,
-		char* ref_to,
+		char* ref,
 		char* from,
 		char* to,
 		size_t nX,
@@ -27,10 +26,10 @@ rectmem_move_range(
 	char* buffer = allocate(nX * nY);
 
 	for (unsigned int i = 0; i < nY; i += 1)
-	{ memcpy(buffer + i * nX, rectmem_ystep(ref_from, from, i), nX); }
+	{ memcpy(buffer + i * nX, rectmem_ystep(ref, from, i), nX); }
 
 	for (unsigned int i = 0; i < nY; i += 1)
-	{ memcpy(rectmem_ystep(ref_to, to, i), buffer + i * nX, nX); }
+	{ memcpy(rectmem_ystep(ref, to, i), buffer + i * nX, nX); }
 
 	return;
 }

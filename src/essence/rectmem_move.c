@@ -15,13 +15,12 @@
 
 void
 rectmem_move(
-		char* ref_from,
-		char* ref_to,
+		char* ref,
 		char* from_start,
 		char* from_end,
 		char* to
 ) {
-	rectmem_move_range(ref_from, ref_to, from_start, to,
-			rectmem_xindex_of(ref_from, from_end) - rectmem_xindex_of(ref_from, from_end) + 1,
-			rectmem_yindex_of(ref_from, from_end) - rectmem_yindex_of(ref_from, from_end) + 1);
+	rectmem_move_range(ref, from_start, to,
+			rectmem_xindex_of(ref, from_end) - rectmem_xindex_of(ref, from_end) + 1,
+			rectmem_yindex_of(ref, from_end) - rectmem_yindex_of(ref, from_end) + 1);
 }
