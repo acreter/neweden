@@ -20,5 +20,7 @@ rectmem_allocate(
 		size_t y
 ) {
 	struct rectmem* new = xallocate(sizeof (struct rectmem) + x * y);
+	new->dim.x = x;
+	new->dim.y = y;
 	return new->block;
 }
