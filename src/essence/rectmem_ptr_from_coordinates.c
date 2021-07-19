@@ -19,5 +19,5 @@ rectmem_ptr_from_coordinates(
 		size_t x,
 		size_t y
 ) {
-	return block + y * rectmem_dimensions(block)->x +x + x;
+	return block + y * rectmem_dimensions(block)->x + x;
 }
