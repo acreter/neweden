@@ -14,17 +14,16 @@
 #include <neweden/everyshore/dynamic_matrix.h>
 
 void
-_dynmatrix_insert_cols(
+_dynmatrix_remove_rows(
 		char** block,
 		size_t index,
-		size_t n,
-		size_t element_size
+		size_t n
 ) {
 	struct dimensions* old_dim = rectmem_dimensions(*block);
-	char* new = rectmem_allocate(old_dim->x + n * element_size, old_dim->y);
+	char* new = rectmem_allocate(old_dim->x, old_dim->y - n);
 
-	rectmem_copy_range(*block, new, *block, new, index * element_size, old_dim->y);
-	rectmem_copy_range(*block, new, rectmem_xstep(*block, *block, index * element_size), rectmem_xstep(new, new, (index + n) * element_size), old_dim->x - index * element_size, old_dim->y);
+	rectmem_copy_range(*block, new, *block, new, old_dim->x, index);
+	rectmem_copy_range(*block, new, rectmem_ystep(*block, *block, index + n), rectmem_ystep(new, new, index), old_dim->x, old_dim->y - index - n);
 	
 	rectmem_free(block);
 	*block = new;

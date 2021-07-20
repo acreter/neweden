@@ -14,7 +14,7 @@
 #include <neweden/everyshore/dynamic_matrix.h>
 
 void
-dynmatrix_insert_rows(
+_dynmatrix_insert_rows(
 		char** block,
 		size_t index,
 		size_t n

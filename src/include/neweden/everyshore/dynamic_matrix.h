@@ -11,8 +11,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#ifndef __MATRIX_H_INCLUDED
-#define __MATRIX_H_INCLUDED 1
+#ifndef __DYNAMIC_MATRIX_H_INCLUDED
+#define __DYNAMIC_MATRIX_H_INCLUDED 1
 
 #include <neweden/essence/rectangular_memory.h>
 
@@ -35,19 +35,25 @@ _dynmatrix_init(
 	_rectmem_free((char**) (block))
 
 void
-dynmatrix_insert_rows(
+_dynmatrix_insert_rows(
 		char** block,
 		size_t index,
 		size_t n
 );
 
 void
-_matrix_insert_cols(
+_dynmatrix_insert_cols(
 		char** block,
 		size_t index,
 		size_t n,
 		size_t element_size
 );
+
+#define dynmatrix_insert_rows(block, index, n) \
+	_dynmatrix_insert_rows( \
+			(char**) (block), \
+			(index), \
+			(n))
 
 #define dynmatrix_insert_cols(block, index, n) \
 	_dynmatrix_insert_cols( \
@@ -57,23 +63,35 @@ _matrix_insert_cols(
 			sizeof **(block))
 
 void
-_matrix_remove_rows(
+_dynmatrix_remove_rows(
+		char** block,
+		size_t index,
+		size_t n
+);
+
+void
+_dynmatrix_remove_cols(
 		char** block,
 		size_t index,
 		size_t n,
 		size_t element_size
 );
 
-void
-_matrix_remove_cols(
-		char** block,
-		size_t index,
-		size_t n,
-		size_t element_size
-);
+#define dynmatrix_remove_rows(block, index, n) \
+	_dynmatrix_remove_rows( \
+			(char**) (block), \
+			(index), \
+			(n))
+
+#define dynmatrix_remove_cols(block, index, n) \
+	_dynmatrix_remove_cols( \
+			(char**) (block), \
+			(index), \
+			(n), \
+			sizeof **(block))
 
 void
-_matrix_remove_entry(
+_dynmatrix_remove_entry(
 		char** block,
 		size_t col,
 		size_t row,
@@ -81,7 +99,7 @@ _matrix_remove_entry(
 );
 
 int
-_matrix_remove_entryp(
+_dynmatrix_remove_entryp(
 		char** block,
 		void* ptr,
 		size_t element_size
