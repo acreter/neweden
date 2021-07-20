@@ -46,6 +46,23 @@ _dynmatrix_dimensions(
 			sizeof **(block))
 
 void
+_dynmatrix_ptr_from_coordinates(
+		char** block,
+		char** rval,
+		size_t col,
+		size_t row,
+		size_t element_size
+);
+
+#define dynmatrix_ptr_from_coordinates(block, rval, col, row) \
+		_dynmatrix_ptr_from_coordinates( \
+				(char**) (block), \
+				(char**) (rval), \
+				(col), \
+				(row), \
+				sizeof **(block))
+
+void
 _dynmatrix_insert_rows(
 		char** block,
 		size_t index,
