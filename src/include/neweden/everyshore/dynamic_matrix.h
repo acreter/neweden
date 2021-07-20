@@ -98,11 +98,24 @@ _dynmatrix_remove_entry(
 		size_t element_size
 );
 
-int
+void
 _dynmatrix_remove_entryp(
 		char** block,
-		void* ptr,
+		char* ptr,
 		size_t element_size
 );
+
+#define dynmatrix_remove_entry(block, col, row) \
+	_dynmatrix_remove_entry( \
+			(char**) (block), \
+			(col), \
+			(row) \
+			sizeof **(block))
+
+#define dynmatrix_remove_entryp(block, ptr) \
+	_dynmatrix_remove_entryp( \
+			(char**) (block), \
+			(char*) (ptr), \
+			sizeof **(block))
 
 #endif
