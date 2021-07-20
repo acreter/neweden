@@ -19,11 +19,11 @@ _dynmatrix_remove_rows(
 		size_t index,
 		size_t n
 ) {
-	struct dimensions* old_dim = rectmem_dimensions(*block);
-	char* new = rectmem_allocate(old_dim->x, old_dim->y - n);
+	struct dimensions old_dim = rectmem_dimensions(*block);
+	char* new = rectmem_allocate(old_dim.x, old_dim.y - n);
 
-	rectmem_copy_range(*block, new, *block, new, old_dim->x, index);
-	rectmem_copy_range(*block, new, rectmem_ystep(*block, *block, index + n), rectmem_ystep(new, new, index), old_dim->x, old_dim->y - index - n);
+	rectmem_copy_range(*block, new, *block, new, old_dim.x, index);
+	rectmem_copy_range(*block, new, rectmem_ystep(*block, *block, index + n), rectmem_ystep(new, new, index), old_dim.x, old_dim.y - index - n);
 	
 	rectmem_free(block);
 	*block = new;

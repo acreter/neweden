@@ -29,7 +29,7 @@ struct rectmem*
 rectmem_self(
 		char* block);
 
-struct dimensions*
+struct dimensions
 rectmem_dimensions(
 		char* block);
 

@@ -13,20 +13,12 @@
 
 #include <neweden/everyshore/dynamic_matrix.h>
 
-void
-_dynmatrix_remove_cols(
+struct dimensions
+_dynmatrix_dimensions(
 		char** block,
-		size_t index,
-		size_t n,
 		size_t element_size
 ) {
-	struct dimensions old_dim = rectmem_dimensions(*block);
-	char* new = rectmem_allocate(old_dim.x - n * element_size, old_dim.y);
-
-	rectmem_copy_range(*block, new, *block, new, index * element_size, old_dim.y);
-	rectmem_copy_range(*block, new, rectmem_xstep(*block, *block, (index + n) * element_size), rectmem_xstep(new, new, index * element_size), old_dim.x - (index + n) * element_size, old_dim.y);
-	
-	rectmem_free(block);
-	*block = new;
-	return;
+	struct dimensions dim = rectmem_dimensions(*block);
+	dim.x /= element_size;
+	return dim;
 }

@@ -18,5 +18,5 @@ rectmem_xindex_of(
 		char* block,
 		char* ptr
 ) {
-	return (ptr - block) % rectmem_dimensions(block)->x;
+	return (ptr - block) % rectmem_dimensions(block).x;
 }

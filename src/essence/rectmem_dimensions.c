@@ -13,9 +13,9 @@
 
 #include <neweden/essence/rectangular_memory.h>
 
-struct dimensions*
+struct dimensions
 rectmem_dimensions(
 		char* block)
 {
-	return block ? (struct dimensions*) rectmem_self(block) : NULL;
+	return *((struct dimensions*) rectmem_self(block));
 }

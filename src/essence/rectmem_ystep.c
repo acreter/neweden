@@ -19,5 +19,5 @@ rectmem_ystep(
 		char* current,
 		unsigned int by
 ) {
-	return current + by * rectmem_dimensions(block)->x;
+	return current + by * rectmem_dimensions(block).x;
 }

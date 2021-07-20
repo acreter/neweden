@@ -32,7 +32,18 @@ _dynmatrix_init(
 			sizeof **(block))
 
 #define dynmatrix_free(block) \
-	_rectmem_free((char**) (block))
+	rectmem_free((char**) (block))
+
+struct dimensions
+_dynmatrix_dimensions(
+		char** block,
+		size_t element_size
+);
+
+#define dynmatrix_dimensions(block) \
+	_dynmatrix_dimensions( \
+			(char**) (block), \
+			sizeof **(block))
 
 void
 _dynmatrix_insert_rows(
