@@ -53,6 +53,12 @@ rectmem_yindex_of(
 		char* ptr);
 
 char*
+rectmem_ptr_from_coordinates(
+		char* block,
+		size_t x,
+		size_t y);
+
+char*
 rectmem_xstep(
 		char* block,
 		char* current,
@@ -83,16 +89,14 @@ rectmem_copy_range(
 
 void
 rectmem_move(
-		char* ref_from,
-		char* ref_to,
+		char* ref,
 		char* from_start,
 		char* from_end,
 		char* to);
 
 void
 rectmem_move_range(
-		char* ref_from,
-		char* ref_to,
+		char* ref,
 		char* from,
 		char* to,
 		size_t nX,

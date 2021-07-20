@@ -12,6 +12,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>. */
 
 #include <neweden/essence/rectangular_memory.h>
+#include <neweden/essence/allocate.h>
 
 #include <string.h>
 
@@ -24,6 +25,8 @@ rectmem_move_range(
 		size_t nY
 ) {
 	char* buffer = allocate(nX * nY);
+	if (!buffer)
+		return;
 
 	for (unsigned int i = 0; i < nY; i += 1)
 	{ memcpy(buffer + i * nX, rectmem_ystep(ref, from, i), nX); }
@@ -31,5 +34,6 @@ rectmem_move_range(
 	for (unsigned int i = 0; i < nY; i += 1)
 	{ memcpy(rectmem_ystep(ref, to, i), buffer + i * nX, nX); }
 
+	unallocate((void**) &buffer);
 	return;
 }
