@@ -53,6 +53,6 @@ install: all
 	$(INSTALL) -m 755 -D $(REALNAME) $(PREFIX)/lib
 	ln -sf $(notdir $(SOMJR)) $(PREFIX)/lib/$(notdir $(SONAME))
 	ln -sf $(notdir $(REALNAME)) $(PREFIX)/lib/$(notdir $(SOMJR))
-	$(INSTALL) -m 644 -D -t $(PREFIX)/include/neweden/$(LIBNAME) $(wildcard ../include/neweden/$(LIBNAME)/*.h)
+	$(INSTALL) -m 644 -D -t $(PREFIX)/include/neweden/$(LIBNAME) $(wildcard ../include/neweden/$(DEF_LIBNAME)/*.h)
 
 .PHONY: all clean install
